@@ -1,3 +1,4 @@
+import QRCode from 'qrcode';
 import './style.css';
 
 const app = document.getElementById('app')!;
@@ -21,6 +22,11 @@ adder.addEventListener('click', () => {
 
 app.appendChild(list);
 app.appendChild(adder);
+
+const qr = document.createElement('img');
+qr.id = 'qr';
+qr.className = 'qr';
+app.appendChild(qr);
 
 function initChannels() {
   if (location.search) {
@@ -92,4 +98,22 @@ function setState(newState: Record<string, any>) {
   });
   const stateAsParams = new URLSearchParams(state);
   window.history.replaceState(null, '', `?${stateAsParams.toString()}`);
+  displayQR();
+}
+
+async function displayQR() {
+  try {
+    const dataURL = await QRCode.toDataURL(location.href, {
+      color: {
+        light: '#e3c475',
+        dark: '#101612',
+      },
+    });
+    const qr: HTMLImageElement = document.getElementById(
+      'qr'
+    )! as HTMLImageElement;
+    qr.src = dataURL;
+  } catch (err) {
+    console.error(err);
+  }
 }
