@@ -25,7 +25,24 @@ body {
   color: var(--text-color);
 }
 
-.wrapper {
+#app {
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  flex-grow: 1;
+}
+
+header {
+  display: flex;
+}
+
+h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  margin: auto;
+  font-size: 2rem;
+}
+
+main {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -45,20 +62,8 @@ ul {
 
 li {
   display: grid;
-  grid-template-columns: 4rem 1fr;
+  grid-template-columns: 4rem 1fr 4rem;
   gap: 1rem;
-}
-
-@media screen and (min-width: 640px) {
-  body {
-    font-size: 16px;
-  }
-  .wrapper {
-    flex-grow: 0;
-  }
-  li {
-    grid-template-columns: 4rem minmax(20rem, 1fr);
-  }
 }
 
 li span {
@@ -109,6 +114,18 @@ li span {
 }
 
 @media screen and (min-width: 640px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  body {
+    font-size: 16px;
+  }
+  .wrapper {
+    flex-grow: 0;
+  }
+  li {
+    grid-template-columns: 4rem minmax(20rem, 1fr) minmax(4rem, .5fr);
+  }
   .qr {
     width: 400px;
   }
