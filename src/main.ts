@@ -60,10 +60,13 @@ adder.addEventListener('click', () => {
 main.appendChild(list);
 main.appendChild(adder);
 
+const qrHolder = document.createElement('div');
+qrHolder.className = 'qr-holder';
 const qr = document.createElement('img');
 qr.id = 'qr';
 qr.className = 'qr';
-main.appendChild(qr);
+qrHolder.appendChild(qr);
+main.appendChild(qrHolder);
 
 function render() {
   const { channels, labels, mics, title, qr } = getState();
@@ -179,7 +182,10 @@ function setState(newState: Partial<State>) {
 
 async function displayQR() {
   try {
-    const dataURL = await QRCode.toDataURL(location.href, {
+    const readonlyState = location.href
+      .replace('readonly=false', 'readonly=true')
+      .replace('qr=true', 'qr=false');
+    const dataURL = await QRCode.toDataURL(readonlyState, {
       color: {
         light: '#e3c475',
         dark: '#101612',

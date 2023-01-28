@@ -46,7 +46,7 @@ main {
   display: flex;
   flex-direction: column;
   margin: auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   flex-grow: 1;
 }
 
@@ -62,8 +62,8 @@ ul {
 
 li {
   display: grid;
-  grid-template-columns: 4rem 1fr 4rem;
-  gap: 1rem;
+  grid-template-columns: max-content 1fr 1fr;
+  gap: .75rem;
 }
 
 li span {
@@ -107,10 +107,26 @@ li span {
   outline: none;
 }
 
+.qr-holder {
+  position: relative;
+  margin: 1rem 0 3rem;
+}
+
+.qr-holder:after {
+  display: block;
+  content: '';
+  position: absolute;
+  height: 102%;
+  width: 102%;
+  top: -1%;
+  left: -1%;
+  box-shadow: 0 0 8px 18px var(--bg-color) inset;
+}
+
 .qr {
   width: 100%;
   height: auto;
-  margin: 1rem auto;
+  margin: auto;
 }
 
 @media screen and (min-width: 640px) {
@@ -120,11 +136,19 @@ li span {
   body {
     font-size: 16px;
   }
+  main {
+    padding: 2rem;
+  }
   .wrapper {
     flex-grow: 0;
   }
   li {
     grid-template-columns: 4rem minmax(20rem, 1fr) minmax(4rem, .5fr);
+    gap: 1rem;
+  }
+  .qr-holder {
+    margin: auto;
+    margin-bottom: 5rem;
   }
   .qr {
     width: 400px;
